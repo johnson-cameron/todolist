@@ -44,6 +44,19 @@ input{
   border-radius: 5px;
 }
 
+.add{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+i{
+  margin-top: 10%;
+}
+
+i:hover{
+  cursor: pointer;
+}
+
 div{
   display: flex;
   justify-content: space-between;
@@ -83,6 +96,10 @@ button{
 /* these are classes for the actual line through */
 .completed{
   text-decoration: line-through;
+}
+
+button:hover{
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 768px){

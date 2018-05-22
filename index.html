@@ -14,19 +14,28 @@
   <section ng-controller="TodoController as todo">
     <h2>TODO List</h2>
     <h4>A place to store the things you have to do!</h4>
-    <input type="text" placeholder="Filter your to-dos">
-    <div ng-repeat="item in todo.list"> 
+    <input ng-model="search.task" type="text" placeholder="Filter your to-dos">
+    <div ng-repeat="item in todo.list | filter: search"> 
       <form>
         <p id="num">{{$index + 1}}.</p>
-        <button id="btn" class="complete" ng-if="item.completed === false">Complete</button> 
+        <button ng-click="todo.completeTask($index, todo.task);" id="btn" class="complete" ng-if="item.completed === false">Complete</button> 
         <p id="tsk" ng-class="{'completed': item.completed === true, 'incomplete': item.completed === false}">{{ item.task }}</p>
       </form>
-      <i ng-click="dostuff" class="material-icons">clear</i>
-      
-    </div>
-    <input type="text" placeholder="Add your to do">
-    <button id="add">Add</button>
+      <div>
+        <button ng-click="todo.editTask($index, todo.task);">Edit</button>
+        <i ng-click="todo.removeTask($index);" class="material-icons">clear</i>
+      </div>
     
+    </div>
+    <form class="add" ng-submit="todo.addTask(todo.task);">
+      <input ng-model="todo.task" type="text" placeholder="Add your to do">
+      <button ng-click="ng-submit" id="add">Add</button>
+    </form>
+
+    <form ng-submit="todo.editTask(todo.tempIndex, todo.tempTask);" ng-show="todo.showForm">
+      <input type="text" ng-model="todo.tempTask">
+      <button ng-click="todo.updateTask(todo.tempIndex, todo.tempTask)">Update The Item</button>
+    </form>
   </section>
 
   <script src="https://code.angularjs.org/1.6.5/angular.min.js"></script>
